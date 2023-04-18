@@ -1,0 +1,738 @@
+/* :root {
+  --color-primary: #e6e6e6;
+  --color-hover: #d1d1d1;
+  --clolor-btn-num: #fafafa;
+  --color-btn-other: #f0f0f0;
+  /* color: #0047cc; */
+
+:root[data-theme="main"] {
+  --color-primary: #e6e6e6;
+  --color-hover: #d1d1d1;
+  --clolor-btn-num: #fafafa;
+  --color-btn-other: #f0f0f0;
+  --radius: 0;
+}
+
+:root[data-theme="blue"] {
+  --color-primary: #00ffff;
+  --color-hover: #0047cc;
+  --clolor-btn-num: #00c3ff;
+  --color-btn-other: #008cff;
+  --radius: 15px 0 15px 0;
+}
+
+:root[data-theme="green"] {
+  --color-primary: #9dc939;
+  --color-hover: #008006;
+  --clolor-btn-num: #7aff3c;
+  --color-btn-other: #3cbd00;
+  --radius: 15px;
+}
+
+:root[data-theme="purple"] {
+  --color-primary: #cd51d8;
+  --color-hover: #530053;
+  --clolor-btn-num: #f04df0;
+  --color-btn-other: #6b136b;
+  --radius: 10px 10px 10px 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--color-primary);
+}
+
+/* the main grid (container) and media queries to make the most small size of the wiew*/
+#main-container {
+  height: 100vh;
+  width: 100vw;
+  min-width: 470px;
+  min-height: 410px;
+  display: grid;
+  grid-template-columns: 74% 26%;
+  grid-template-rows: 5% 6% 16% 5% 68%;
+  grid-template-areas:
+    "head head"
+    "stan his"
+    "res his"
+    "mb his"
+    "buttons his";
+}
+
+/* the header part and the buttons of the main window*/
+#header {
+  grid-area: head;
+}
+
+.headcont {
+  background: var(--color-primary);
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.head {
+  font-size: 11px;
+  margin: 3px;
+}
+
+.cont {
+  display: flex;
+  flex-direction: row;
+}
+
+.cont .close {
+  color: gray;
+  width: 30px;
+  height: 30px;
+}
+
+.cont .close:hover {
+  background: red;
+  color: white;
+  cursor: pointer;
+}
+
+.cont .underline {
+  color: gray;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+
+.cont .underline:hover {
+  background: var(--color-hover);
+  cursor: pointer;
+  color: black;
+}
+
+.cont .window {
+  color: gray;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+
+.cont .window:hover {
+  color: black;
+  background: var(--color-hover);
+  cursor: pointer;
+}
+
+/* Standard and hamburger and some other options */
+
+#stand {
+  grid-area: stan;
+}
+
+#contstand {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+}
+
+#contstand div {
+  border-radius: var(--radius);
+}
+
+.hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 25px;
+  font-size: 30px;
+  font-weight: 100;
+  left: 0px;
+  top: -10px;
+}
+
+.hamtext {
+  height: 30px;
+}
+
+.stanst {
+  display: flex;
+  flex-direction: row;
+  border-radius: var(--radius);
+}
+
+#contstand .hamtext:hover {
+  cursor: pointer;
+  background: var(--color-hover);
+  color: #111;
+}
+
+#contstand .st {
+  margin-left: 10px;
+}
+
+#contstand .stay {
+  margin-left: 10px;
+  text-align: center;
+  height: 30px;
+  width: 30px;
+}
+
+#contstand .stay:hover {
+  cursor: pointer;
+  /* border: 1px solid silver; */
+  background-color: var(--color-hover);
+}
+
+.clockbt {
+  display: none;
+}
+
+.clock-icon {
+  display: flex;
+  margin-right: 3px;
+}
+
+/* Hitory and Memory Part */
+
+#hm {
+  grid-area: his;
+}
+
+.history-head {
+  display: flex;
+  flex-direction: row;
+}
+
+.history {
+  font-size: 15px;
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.historyitem {
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-content: flex-end;
+  align-items: flex-end;
+  margin: 7px;
+}
+
+.historyitem:hover {
+  cursor: pointer;
+  background-color: var(--color-hover);
+  border-radius: var(--radius);
+}
+
+.historytext {
+  display: flex;
+}
+
+.history:hover {
+  cursor: pointer;
+}
+
+.history-show-item {
+  justify-content: flex-end;
+  flex-direction: column;
+  align-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+  height: 500px;
+  display: block;
+}
+
+.memory-show-item {
+  list-style: none;
+}
+
+.memory {
+  margin-left: 5px;
+  padding-left: 5px;
+  margin-right: 5px;
+  padding-right: 5px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.memory:hover {
+  cursor: pointer;
+}
+
+.delete-btn-area {
+  width: 20%;
+  height: 30px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+.delete-btn {
+  background: url("delete.png") no-repeat center center/cover;
+  width: 25px;
+  height: 25px;
+  position: fixed;
+  right: 7px;
+  bottom: 7px;
+  display: none;
+}
+
+.delete-btn:hover {
+  cursor: pointer;
+}
+
+.selected {
+  border-bottom: 2px skyblue solid;
+  font-size: 14px;
+}
+
+/* Result Part */
+.res {
+  grid-area: res;
+}
+
+.result {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: end;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.prevres {
+  display: flex;
+  /* align-items: self-end; */
+  justify-content: flex-end;
+  font-size: medium;
+  color: black;
+}
+
+/* M bottons under the result container */
+#mbuts {
+  grid-area: mb;
+}
+
+#mbots {
+  border-radius: var(--radius);
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: row;
+  max-width: 420px;
+  height: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+}
+
+#mbots div {
+  border-radius: var(--radius);
+}
+
+.mbt {
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin-right: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.mfsh {
+  display: none;
+}
+
+#mbots .mss:hover,
+.mns:hover,
+.mpl:hover {
+  background: var(--color-hover);
+  cursor: pointer;
+}
+
+/* #mbots .mc,
+.mr,
+.mfsh {
+  border: none;
+  color: #818181;
+} */
+
+#mbots .same {
+  border: none;
+  color: #818181;
+}
+
+/* mainbotts grid */
+
+.mainbots {
+  grid-area: buttons;
+  display: grid;
+  grid-gap: 2px;
+  height: 100%;
+  width: 100%;
+  background: var(--color-primary);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-areas:
+    "per ec cc delt"
+    "onx t2 radic tgh"
+    "seven eight nine multi"
+    "four five six tafrigh"
+    "one two three jam"
+    "jata zero dott ms";
+}
+
+.part1 {
+  font-weight: 700;
+}
+
+.mainbots div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius);
+}
+/* the color of buttons and the hover of them(main buttons) */
+
+.percent {
+  grid-area: per;
+}
+
+.mainbots .percent:hover {
+  background: var(--color-hover);
+}
+
+.ce {
+  grid-area: ec;
+}
+
+.mainbots .ce:hover {
+  background: var(--color-hover);
+}
+
+.c {
+  grid-area: cc;
+}
+
+.mainbots .c:hover {
+  background: var(--color-hover);
+}
+
+.del {
+  grid-area: delt;
+}
+
+.mainbots .del:hover {
+  background: var(--color-hover);
+}
+
+.oneonx {
+  grid-area: onx;
+}
+
+.mainbots .oneonx:hover {
+  background: var(--color-hover);
+}
+
+.tavan2 {
+  grid-area: t2;
+}
+
+.mainbots .tavan2:hover {
+  background: var(--color-hover);
+}
+
+.rad2 {
+  grid-area: radic;
+}
+
+.mainbots .rad2:hover {
+  background: var(--color-hover);
+}
+
+.taghsim {
+  grid-area: tgh;
+  font-size: 25px;
+}
+
+.mainbots .taghsim:hover {
+  background: var(--color-hover);
+}
+
+.no7 {
+  grid-area: seven;
+}
+
+.mainbots .no7:hover {
+  background: var(--color-hover);
+}
+
+.no8 {
+  grid-area: eight;
+}
+
+.mainbots .no8:hover {
+  background: var(--color-hover);
+}
+
+.no9 {
+  grid-area: nine;
+}
+
+.mainbots .no9:hover {
+  background: var(--color-hover);
+}
+
+.multiple {
+  grid-area: multi;
+}
+
+.mainbots .multiple:hover {
+  background: var(--color-hover);
+}
+
+.no4 {
+  grid-area: four;
+}
+
+.mainbots .no4:hover {
+  background: var(--color-hover);
+}
+
+.no5 {
+  grid-area: five;
+}
+
+.mainbots .no5:hover {
+  background: var(--color-hover);
+}
+
+.no6 {
+  grid-area: six;
+}
+
+.mainbots .no6:hover {
+  background: var(--color-hover);
+}
+
+.minus {
+  grid-area: tafrigh;
+  font-size: 35px;
+}
+
+.mainbots .minus:hover {
+  background: var(--color-hover);
+}
+
+.no1 {
+  grid-area: one;
+}
+
+.mainbots .no1:hover {
+  background: var(--color-hover);
+}
+
+.no2 {
+  grid-area: two;
+}
+
+.mainbots .no2:hover {
+  background: var(--color-hover);
+}
+
+.no3 {
+  grid-area: three;
+}
+
+.mainbots .no3:hover {
+  background: var(--color-hover);
+}
+
+.plus {
+  grid-area: jam;
+  font-size: 25px;
+}
+
+.mainbots .plus:hover {
+  background: var(--color-hover);
+}
+
+.pm {
+  grid-area: jata;
+}
+
+.mainbots .pm:hover {
+  background: var(--color-hover);
+}
+
+.no0 {
+  grid-area: zero;
+}
+
+.mainbots .no0:hover {
+  background: var(--color-hover);
+}
+
+.dot {
+  grid-area: dott;
+}
+
+.mainbots .dot:hover {
+  background: var(--color-hover);
+}
+
+.equalbtn {
+  grid-area: ms;
+  background: skyblue;
+  font-size: 30px;
+}
+
+.mainbots .equal:hover {
+  background: var(--color-hover);
+}
+
+.mainbots .part1 {
+  background: var(--clolor-btn-num);
+}
+
+.mainbots .part2 {
+  background: var(--color-btn-other);
+}
+
+/* media queries are down here!*/
+
+@media screen and (min-width: 740px) and (max-width: 1023px) {
+  #main-container {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 77% 23%;
+    grid-template-rows: 5% 6% 16% 5% 68%;
+    grid-template-areas:
+      "head head"
+      "stan his"
+      "res his"
+      "mb his"
+      "buttons his";
+  }
+
+  .mainbots {
+    grid-area: buttons;
+    display: grid;
+    grid-gap: 2px;
+    height: 100%;
+    width: 100%;
+    font-size: bold;
+    border-radius: var(--radius);
+    background: var(--color-primary);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas:
+      "per ec cc delt"
+      "onx t2 radic tgh"
+      "seven eight nine multi"
+      "four five six tafrigh"
+      "one two three jam"
+      "jata zero dott ms";
+  }
+
+  .part1 {
+    font-weight: 700;
+  }
+}
+
+@media screen and (min-width: 740px) {
+  #main-container {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  #main-container {
+    grid-template-columns: 1fr 43%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #hm {
+    display: none;
+  }
+  #main-container {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 5% 6% 16% 5% 68%;
+    grid-template-areas:
+      "head"
+      "stan"
+      "res"
+      "mb"
+      "buttons";
+  }
+
+  #result {
+    padding-right: 8px;
+    margin-top: 17px;
+    bottom: -10px;
+    font-size: 35px;
+  }
+
+  .close:hover {
+    height: 23px;
+  }
+
+  .window:hover {
+    height: 23px;
+  }
+
+  .underline:hover {
+    height: 23px;
+  }
+
+  .clockbt {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    margin-right: 3px;
+    margin-top: 3px;
+    font-size: 10px;
+  }
+
+  .clockbt:hover {
+    border: 1px solid silver;
+    background: var(--color-hover);
+    border-radius: var(--radius);
+  }
+
+  .clock-icon {
+    height: 30px;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mbots {
+    width: 100vw;
+    max-width: unset;
+  }
+  .mfsh {
+    display: flex;
+  }
+}
