@@ -15,13 +15,15 @@ const plusminus = document.querySelector(".pm");
 const cbtn = document.querySelector(".c");
 const cebtn = document.querySelector(".ce");
 const delbtn = document.querySelector(".del");
-
+const mr = document.getElementById("mr");
+const mc = document.getElementById("mc");
 const state = {
   firstNumber: "",
   secondNumber: "",
   result: "",
   operator: "",
 };
+let calculationMemory = [];
 
 const shownum = () => {
   if (state.operator === "") {
@@ -182,7 +184,7 @@ function radfunction() {
 }
 
 per.addEventListener("click", () => {
-  if (state.firstNumber && !state.secondNumber) {
+  if (!state.firstNumber) {
     result.textContent = "0";
     Presult.textContent = "0";
     return;
@@ -207,10 +209,7 @@ per.addEventListener("click", () => {
       state.operator = "-";
       break;
     case "X":
-      state.secondNumber = result.textContent;
-      const perx =
-        (Number(state.firstNumber) * Number(state.secondNumber)) / 100;
-      state.secondNumber = perx;
+      state.secondNumber = Number(result.textContent) / 100;
       Presult.textContent = state.firstNumber + " X " + state.secondNumber;
       result.textContent = state.secondNumber;
       state.operator = "X";
@@ -352,7 +351,7 @@ equal.addEventListener("click", () => {
 });
 
 const memorybtn = document.querySelector(".memory");
-const memorylist = document.querySelector(".memory-show-item");
+let memorylist = document.querySelector(".memory-show-item");
 const historylist = document.querySelector(".history-show-item");
 const historybtn = document.querySelector(".history");
 const deleteBtn = document.querySelector(".delete-btn");
@@ -390,8 +389,12 @@ const showhistory = () => {
     }
 
     historylist.addEventListener("click", function (e) {
-      this.removeChild(e.target);
-      historyItems.pop({ ope: e.target, res: e.target, id: e.target });
+      let m = +e.target.id;
+      const x = historyItems.filter((i) => {
+        return m != i.id;
+      });
+      historyItems = [...x];
+      showhistory();
     });
 
     if (historylist.style.display !== "none") {
@@ -422,6 +425,7 @@ historybtn.addEventListener("click", () => {
     showhistory();
   }
 };
+
 const historyClear = () => {
   historyItems = [];
   deleteBtn.style.display = "none";
@@ -447,14 +451,13 @@ const mplusBtn = document.createElement("button");
 const mminusBtn = document.createElement("button");
 const mclearBtn = document.createElement("button");
 
-const restoreMemory = () => {
+const restoreMemory = (memoryRestoreValue) => {
   result.textContent = memoryRestoreValue;
   state.firstNumber = memoryRestoreValue;
   callShowMemory();
 };
 
 let memoryRestoreValue;
-let calculationMemory = [];
 let countMemoryId = 0;
 
 const showMemory = () => {
@@ -462,7 +465,7 @@ const showMemory = () => {
   memoryListItems.style.width = "97%";
   if (calculationMemory.length > 0) {
     for (let memoryItems of calculationMemory) {
-      const { memoryItem, Id } = memoryItems;
+      const { memoryItem, id } = memoryItems;
       const listMemory = document.createElement("li");
       listMemory.style.width = "100%";
       container.style.display = "flex";
@@ -483,15 +486,13 @@ const showMemory = () => {
       container.appendChild(mplusBtn);
       container.appendChild(mminusBtn);
       container.appendChild(mclearBtn);
-      listMemory.id = Id;
+      listMemory.id = id;
       listMemory.classList.add("historyitem");
       listMemory.innerHTML = `${memoryItem}`;
       listMemory.addEventListener("click", function (e) {
         e.target.appendChild(container);
       });
-      memoryListItems.style.flexDirection = "column";
-      memoryListItems.style.justifyContent = "flex-end";
-      memoryListItems.style.alignItems = "flex-end";
+
       memoryListItems.prepend(listMemory);
     }
     if (memoryListItems.style.display !== "none") {
@@ -502,6 +503,15 @@ const showMemory = () => {
     memoryListItems.style.display = "block";
   }
 };
+
+mclearBtn.addEventListener("click", function () {
+  let m = +mclearBtn.parentElement.parentElement.id;
+  const x = calculationMemory.filter((i) => {
+    return m != i.id;
+  });
+  calculationMemory = [...x];
+  showMemory();
+});
 
 const memoryAddItem = () => {
   calculationMemory.push({
@@ -558,9 +568,10 @@ const memoryClear = () => {
 };
 
 const memoryRestore = () => {
-  memoryRestoreValue =
+  let memoryRestoreValue =
     calculationMemory[calculationMemory.length - 1].memoryItem;
-  restoreMemory();
+  restoreMemory(memoryRestoreValue);
+  console.log(memoryRestoreValue);
 };
 
 const callShowMemory = () => {
@@ -587,15 +598,16 @@ memorybtn.addEventListener("click", () => {
   showMemory();
 });
 
+mr.addEventListener("click", () => {
+  memoryRestore();
+});
+mc.addEventListener("click", () => {
+  memoryClear();
+});
+
 memorybtns.addEventListener("click", (e) => {
   let memorybtnclick = e.target.classList.value;
   switch (memorybtnclick) {
-    case "mbt same mc":
-      memoryClear();
-      break;
-    case "mbt same mr":
-      memoryRestore();
-      break;
     case "mbt mpl":
       if (calculationMemory.length === 0) {
         memoryAddItem();
@@ -613,9 +625,61 @@ memorybtns.addEventListener("click", (e) => {
     case "mbt mss":
       memoryAddItem();
       break;
-    case "mbt mfsh":
-      break;
   }
 });
 
 mplusBtn.addEventListener("click", memoryPlus);
+mminusBtn.addEventListener("click", memoryminus);
+
+deleteBtn.addEventListener("click", () => {
+  if (
+    calculationMemory.length > 0 &&
+    memoryListItems.style.display !== "none"
+  ) {
+    memoryClear();
+    deleteBtn.style.display = "none";
+    showMemory();
+  }
+});
+
+const clockBtn = document.querySelector(".clockbt");
+const maincont = document.getElementById("maincontainer");
+const main = document.getElementById("mainbuts");
+
+const clockstyle = () => {
+  let show = document.querySelector(".clockvision");
+  if (historyItems.length == 0) {
+    show.innerHTML = "There's no history here!";
+  } else if (historyItems.length > 0) {
+    historyItems.forEach((x) => {
+      const historyitem = document.createElement("li");
+      historyitem.id = x.id;
+      historyitem.classList.add("historyitem");
+      historyitem.innerHTML = `${x.ope} <br> <span>${x.res}</span>`;
+      historylist.prepend(historyitem);
+      show.innerHTML = historylist.innerHTML;
+    });
+    historylist.addEventListener("click", function (e) {
+      let m = +e.target.id;
+      const x = historyItems.filter((i) => {
+        return m != i.id;
+      });
+      historyItems = [...x];
+      showhistory();
+    });
+  }
+};
+
+clockBtn.addEventListener("click", function () {
+  const show = document.querySelector(".clockvision");
+
+  if (show.style.display === "none") {
+    main.style.display = "none";
+    show.textContent = "There's no history here!";
+    show.style.display = "block";
+    clockstyle();
+  } else {
+    main.style.display = "block";
+    show.style.display = "none";
+  }
+});
