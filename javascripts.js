@@ -394,6 +394,12 @@ const historyAddItem = () => {
   }
 };
 
+const delbt = document.createElement("button");
+delbt.innerText = "Delete";
+delbt.style.width = "50px";
+delbt.style.height = "20px";
+delbt.classList.add("historyitem");
+
 const showhistory = () => {
   historylist.innerHTML = "";
   if (historyItems.length > 0) {
@@ -407,17 +413,20 @@ const showhistory = () => {
     }
 
     historylist.addEventListener("click", function (e) {
-      let m = +e.target.id;
-      const x = historyItems.filter((i) => {
-        return m != i.id;
+      e.target.appendChild(delbt);
+      delbt.addEventListener("click", function () {
+        let m = +delbt.parentElement.id;
+        const x = historyItems.filter((i) => {
+          return m != i.id;
+        });
+        historyItems = [...x];
+        showhistory();
       });
-      historyItems = [...x];
-      showhistory();
     });
+  }
 
-    if (historylist.style.display !== "none") {
-      deleteBtn.style.display = "block";
-    }
+  if (historylist.style.display !== "none") {
+    deleteBtn.style.display = "block";
   } else {
     historylist.innerHTML = "There's no history here!";
     historylist.style.display = "block";
