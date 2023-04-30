@@ -420,11 +420,11 @@ historybtn.addEventListener("click", () => {
   showhistory();
 });
 
-() => {
-  if (historylist.style.display !== "none") {
-    showhistory();
-  }
-};
+// () => {
+//   if (historylist.style.display !== "none") {
+//     showhistory();
+//   }
+// };
 
 const historyClear = () => {
   historyItems = [];
@@ -527,20 +527,10 @@ const memoryAddItem = () => {
   }
   memoryrestorebtn.classList.remove("same");
   memoryrestorebtn.style.cursor = "pointer";
-  memoryrestorebtn.addEventListener("mouseover", () => {
-    memoryrestorebtn.style.backgroundColor = "#d1d1d1";
-  });
-  memoryrestorebtn.addEventListener("mouseout", () => {
-    memoryrestorebtn.style.backgroundColor = "#e6e6e6";
-  });
+  memoryrestorebtn.classList.add("hover");
   clearMemoryBtn.classList.remove("same");
+  clearMemoryBtn.classList.add("hover");
   clearMemoryBtn.style.cursor = "pointer";
-  clearMemoryBtn.addEventListener("mouseover", () => {
-    clearMemoryBtn.style.backgroundColor = "#d1d1d1";
-  });
-  clearMemoryBtn.addEventListener("mouseout", () => {
-    clearMemoryBtn.style.backgroundColor = "#e6e6e6";
-  });
 };
 
 const memoryPlus = () => {
@@ -664,6 +654,7 @@ const clockstyle = () => {
       const x = historyItems.filter((i) => {
         return m != i.id;
       });
+      historyItems = [];
       historyItems = [...x];
       showhistory();
     });
@@ -672,7 +663,6 @@ const clockstyle = () => {
 
 clockBtn.addEventListener("click", function () {
   const show = document.querySelector(".clockvision");
-
   if (show.style.display === "none") {
     main.style.display = "none";
     show.textContent = "There's no history here!";
@@ -681,5 +671,13 @@ clockBtn.addEventListener("click", function () {
   } else {
     main.style.display = "block";
     show.style.display = "none";
+  }
+});
+
+deleteBtn.addEventListener("click", () => {
+  if (historyItems.length > 0 && historylist.style.display !== "none") {
+    historyClear();
+    deleteBtn.style.display = "none";
+    showhistory();
   }
 });

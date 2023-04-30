@@ -257,6 +257,27 @@ body {
   overflow-y: auto;
 }
 
+.history-show-item2 {
+  justify-content: flex-end;
+  flex-direction: column;
+  align-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+  height: 500px;
+  display: none;
+  overflow-y: auto;
+}
+
+.delete-btn2 {
+  background: url("delete.png") no-repeat center center/cover;
+  width: 25px;
+  height: 25px;
+  position: fixed;
+  right: 7px;
+  bottom: 7px;
+  display: none;
+}
+
 .memory-show-item {
   list-style: none;
   /* overflow-y: auto; */
@@ -380,6 +401,11 @@ body {
 #mbots .same {
   border: none;
   color: #818181;
+}
+
+.hover {
+  background: var(--color-hover);
+  cursor: pointer;
 }
 
 /* mainbotts grid */
@@ -761,9 +787,9 @@ body {
     z-index: 1;
   }
   .clockvision {
+    display: none;
     /* grid-area: clockvision; */
     background-color: var(--color-primary);
-    display: none;
     /* box-shadow: 30px black; */
     /* top: -500px; */
     width: 100%;
