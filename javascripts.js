@@ -43,6 +43,18 @@ numbers.forEach((el) => {
     } else {
       state.firstNumber += el.textContent;
     }
+    if (state.result) {
+      state.result = "";
+      state.secondNumber = "";
+      if (state.firstNumber === "" && state.operator === "") {
+        result.textContent += el.textContent;
+      }
+      if (state.operator && state.firstNumber) {
+        state.secondNumber += el.textContent;
+      } else {
+        state.firstNumber += el.textContent;
+      }
+    }
     shownum();
   });
 });
@@ -70,9 +82,9 @@ add.addEventListener("click", () => {
     const sum = Number(state.firstNumber) + Number(state.secondNumber);
     state.firstNumber = sum;
     Presult.textContent = state.firstNumber + " + ";
-    state.secondNumber = result.textContent;
-    state.secondNumber = "";
+    state.secondNumber = sum;
     result.textContent = sum;
+    state.secondNumber = "";
   }
 });
 
@@ -86,6 +98,7 @@ function menhafunction() {
   state.firstNumber = menha;
   state.result = menha;
   result.textContent = state.result;
+  state.secondNumber = "";
 }
 
 minus.addEventListener("click", () => {
@@ -133,7 +146,7 @@ multi.addEventListener("click", () => {
 });
 
 function dividfunction() {
-  if (!state.secondNumber) {
+  if (state.firstNumber && !state.secondNumber) {
     state.secondNumber = result.textContent;
   }
   const divid = Number(state.firstNumber) / Number(state.secondNumber);
@@ -146,17 +159,22 @@ function dividfunction() {
 divid.addEventListener("click", () => {
   state.operator = "/";
   if (!state.secondNumber) {
-    const divid = Number(state.firstNumber) / Number(state.secondNumber);
-    state.firstNumber = divid;
+    // const divid = Number(state.firstNumber) / Number(state.secondNumber);
+    // state.firstNumber = divid;
     Presult.textContent = state.firstNumber + " / ";
     result.textContent = state.firstNumber;
   } else {
     const divid = Number(state.firstNumber) / Number(state.secondNumber);
-    state.firstNumber = divid;
     Presult.textContent = state.firstNumber + " / ";
-    state.secondNumber = result.textContent;
     state.secondNumber = "";
-    result.textContent = divid;
+    state.secondNumber = result.textContent;
+    state.firstNumber = divid;
+    // result.textContent = divid;
+  }
+  if (state.result) {
+    // state.firstNumber = "";
+    Presult.textContent = state.firstNumber + "/";
+    result.textContent = state.firstNumber;
   }
 });
 
@@ -419,12 +437,6 @@ historybtn.addEventListener("click", () => {
   }
   showhistory();
 });
-
-// () => {
-//   if (historylist.style.display !== "none") {
-//     showhistory();
-//   }
-// };
 
 const historyClear = () => {
   historyItems = [];
