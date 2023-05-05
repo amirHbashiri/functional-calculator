@@ -10,6 +10,7 @@
   --color-hover: #d1d1d1;
   --clolor-btn-num: #fafafa;
   --color-btn-other: #f0f0f0;
+  --color-primary-eq: skyblue;
   --radius: 0;
 }
 
@@ -18,6 +19,7 @@
   --color-hover: #0047cc;
   --clolor-btn-num: #00c3ff;
   --color-btn-other: #008cff;
+  --color-primary-eq: #00c3ff;
   --radius: 15px 0 15px 0;
 }
 
@@ -26,6 +28,7 @@
   --color-hover: #008006;
   --clolor-btn-num: #7aff3c;
   --color-btn-other: #3cbd00;
+  --color-primary-eq: #7aff3c;
   --radius: 15px;
 }
 
@@ -34,6 +37,7 @@
   --color-hover: #530053;
   --clolor-btn-num: #f04df0;
   --color-btn-other: #6b136b;
+  --color-primary-eq: #f04df0;
   --radius: 10px 10px 10px 0;
 }
 
@@ -323,7 +327,7 @@ body {
 }
 
 .selected {
-  border-bottom: 2px skyblue solid;
+  border-bottom: 2px orange solid;
   font-size: 14px;
 }
 
@@ -629,7 +633,7 @@ body {
 
 .equalbtn {
   grid-area: ms;
-  background: skyblue;
+  background: var(--color-primary-eq);
   font-size: 30px;
 }
 
