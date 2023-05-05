@@ -44,6 +44,7 @@ numbers.forEach((el) => {
       state.firstNumber += el.textContent;
     }
     if (state.result) {
+      state.firstNumber === state.result;
       state.result = "";
       state.secondNumber = "";
       if (state.firstNumber === "" && state.operator === "") {
@@ -69,6 +70,7 @@ function addfunction() {
   state.firstNumber = sum;
   state.result = sum;
   result.textContent = state.result;
+  state.secondNumber = "";
 }
 
 add.addEventListener("click", () => {
@@ -128,6 +130,7 @@ function multifunction() {
   state.firstNumber = zarb;
   state.result = zarb;
   result.textContent = state.result;
+  state.secondNumber = "";
 }
 
 multi.addEventListener("click", () => {
@@ -154,6 +157,7 @@ function dividfunction() {
   state.firstNumber = divid;
   state.result = divid;
   result.textContent = state.result;
+  state.secondNumber = "";
 }
 
 divid.addEventListener("click", () => {
@@ -161,11 +165,11 @@ divid.addEventListener("click", () => {
   if (!state.secondNumber) {
     // const divid = Number(state.firstNumber) / Number(state.secondNumber);
     // state.firstNumber = divid;
-    Presult.textContent = state.firstNumber + " / ";
+    Presult.textContent = state.firstNumber + " ÷ ";
     result.textContent = state.firstNumber;
   } else {
     const divid = Number(state.firstNumber) / Number(state.secondNumber);
-    Presult.textContent = state.firstNumber + " / ";
+    Presult.textContent = state.firstNumber + " ÷ ";
     state.secondNumber = "";
     state.secondNumber = result.textContent;
     state.firstNumber = divid;
@@ -173,7 +177,7 @@ divid.addEventListener("click", () => {
   }
   if (state.result) {
     // state.firstNumber = "";
-    Presult.textContent = state.firstNumber + "/";
+    Presult.textContent = state.firstNumber + "÷";
     result.textContent = state.firstNumber;
   }
 });
@@ -188,14 +192,14 @@ tavan.addEventListener("click", () => {
 
 radic.addEventListener("click", () => {
   state.operator = "rad";
-  Presult.textContent = "rad" + state.firstNumber;
+  Presult.textContent = "√" + state.firstNumber;
   const rad = Math.sqrt(Number(state.firstNumber));
   state.firstNumber = rad;
   result.textContent = state.firstNumber;
 });
 
 function radfunction() {
-  Presult.textContent = "rad" + state.firstNumber;
+  Presult.textContent = "√" + state.firstNumber;
   const rad = Math.sqrt(Number(state.firstNumber));
   state.firstNumber = rad;
   result.textContent = state.firstNumber;
@@ -237,7 +241,7 @@ per.addEventListener("click", () => {
       const pert =
         (Number(state.firstNumber) * Number(state.secondNumber)) / 100;
       state.secondNumber = pert;
-      Presult.textContent = state.firstNumber + " / " + state.secondNumber;
+      Presult.textContent = state.firstNumber + " ÷ " + state.secondNumber;
       result.textContent = state.secondNumber;
       state.operator = "/";
       break;
