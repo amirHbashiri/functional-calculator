@@ -63,8 +63,9 @@ body {
   min-width: 470px;
   min-height: 410px;
   display: grid;
+  grid-column-gap: 13px;
   grid-template-columns: 74% 26%;
-  grid-template-rows: 5% 6% 16% 5% 68%;
+  grid-template-rows: 4% 6% 16% 6% 68%;
   grid-template-areas:
     "head head"
     "stan his"
@@ -391,7 +392,7 @@ body {
 #mbots .mss:hover,
 .mns:hover,
 .mpl:hover {
-  background: var(--color-hover);
+  background-color: var(--color-hover);
   cursor: pointer;
 }
 
@@ -407,10 +408,10 @@ body {
   color: #818181;
 }
 
-.hover {
+/* .hover {
   background: var(--color-hover);
   cursor: pointer;
-}
+} */
 
 /* mainbotts grid */
 

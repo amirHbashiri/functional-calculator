@@ -186,7 +186,7 @@ tavan.addEventListener("click", () => {
   state.operator = "t2";
   Presult.textContent = "sqr(" + state.firstNumber + ")";
   const t2 = Number(state.firstNumber) * Number(state.firstNumber);
-  state.firstNumber = t2;
+  state.firstNumber = Number(t2).toFixed(2);
   result.textContent = state.firstNumber;
 });
 
@@ -427,10 +427,10 @@ const showhistory = () => {
         showhistory();
       });
     });
-  }
 
-  if (historylist.style.display !== "none") {
-    deleteBtn.style.display = "block";
+    if (historylist.style.display !== "none") {
+      deleteBtn.style.display = "block";
+    }
   } else {
     historylist.innerHTML = "There's no history here!";
     historylist.style.display = "block";
@@ -538,6 +538,20 @@ mclearBtn.addEventListener("click", function () {
   showMemory();
 });
 
+const mouseover1 = function () {
+  memoryrestorebtn.style.backgroundColor = "var(--color-hover)";
+};
+const mouseout1 = function () {
+  memoryrestorebtn.style.backgroundColor = "var(--color-primary)";
+};
+
+const mouseover2 = function () {
+  clearMemoryBtn.style.backgroundColor = "var(--color-hover)";
+};
+const mouseout2 = function () {
+  clearMemoryBtn.style.backgroundColor = "var(--color-primary)";
+};
+
 const memoryAddItem = () => {
   calculationMemory.push({
     memoryItem: result.textContent,
@@ -552,10 +566,12 @@ const memoryAddItem = () => {
   }
   memoryrestorebtn.classList.remove("same");
   memoryrestorebtn.style.cursor = "pointer";
-  memoryrestorebtn.classList.add("hover");
+  memoryrestorebtn.addEventListener("mouseover", mouseover1);
+  memoryrestorebtn.addEventListener("mouseout", mouseout1);
   clearMemoryBtn.classList.remove("same");
-  clearMemoryBtn.classList.add("hover");
   clearMemoryBtn.style.cursor = "pointer";
+  clearMemoryBtn.addEventListener("mouseover", mouseover2);
+  clearMemoryBtn.addEventListener("mouseout", mouseout2);
 };
 
 const memoryPlus = () => {
@@ -618,6 +634,8 @@ mr.addEventListener("click", () => {
 });
 mc.addEventListener("click", () => {
   memoryClear();
+  clearMemoryBtn.removeEventListener("mouseover");
+  memoryrestorebtn.removeEventListener("mouseover");
 });
 
 memorybtns.addEventListener("click", (e) => {
