@@ -267,16 +267,17 @@ function onxfunction() {
 }
 
 dot.addEventListener("click", () => {
-  if (!result.textContent.includes(".") && !state.firstNumber.includes(".")) {
+  if (!state.operator && !result.textContent.includes(".")) {
     result.textContent = result.textContent + ".";
     state.firstNumber = result.textContent;
     shownum();
-  } else if (!result.textContent.includes(".") && state.firstNumber) {
-    result.textContent = result.textContent + ".";
-    state.secondNumber = result.textContent;
-    shownum();
   } else if (state.firstNumber && result.textContent) {
     result.textContent = "0.";
+    state.secondNumber = result.textContent;
+    shownum();
+  }
+  if (state.operator && !state.secondNumber.includes(".")) {
+    result.textContent = result.textContent + ".";
     state.secondNumber = result.textContent;
     shownum();
   }
